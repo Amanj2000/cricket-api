@@ -13,6 +13,6 @@ public class Bowler extends Player {
 
     @Override
     public void display() {
-        System.out.printf("Batsman name: %s\tage: %d\tcategory: %s\truns scored: %d\tballs played: %d", getName(), getAge(), "Bowler", getTotalRun(), getBallsPlayed());
+        System.out.printf("Player: %s\tage: %d\tcategory: %s\truns scored: %d\tballs played: %d\n", getName(), getAge(), "Bowler", getTotalRun(), getBallsPlayed());
     }
 }
