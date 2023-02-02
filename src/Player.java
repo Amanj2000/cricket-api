@@ -19,10 +19,9 @@ abstract public class Player {
     }
 
     public boolean bat() {
-        if(isOut()) return false;
-
-        totalRun += scoreRun();
         ballsPlayed += 1;
+        if(isOut()) return false;
+        totalRun += scoreRun();
         return true;
     }
 

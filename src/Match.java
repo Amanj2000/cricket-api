@@ -10,9 +10,11 @@ public class Match {
     public void startMatch() {
         System.out.println("Team batting: " + team1.getName());
         team1.play();
+        team1.display();
         System.out.println();
         System.out.println("Team batting: " + team2.getName());
         team2.play();
+        team2.display();
         System.out.println();
     }
 
