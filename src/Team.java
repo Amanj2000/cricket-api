@@ -1,8 +1,8 @@
 import java.util.List;
 
 public class Team {
-    private String name;
-    private List<Player> players;
+    private final String name;
+    private final List<Player> players;
     private int teamScore;
     private int ballsPlayed;
 
@@ -11,11 +11,22 @@ public class Team {
         this.players = players;
     }
 
-    public void play() {
+    public void firstInning(int totalBalls) {
+        play(totalBalls, Integer.MAX_VALUE);
+    }
+
+    public void secondInning(int totalBalls, int target) {
+        play(totalBalls, target);
+    }
+
+    private void play(int totalBalls, int target) {
         for(Player p: players) {
-            while(p.bat());
-            teamScore += p.getTotalRun();
-            ballsPlayed += p.getBallsPlayed();
+            while(ballsPlayed < totalBalls && teamScore < target) {
+                ballsPlayed++;
+                int run = p.bat();
+                if(run == -1) break;
+                else teamScore += run;
+            }
             p.display();
         }
     }
@@ -32,7 +43,11 @@ public class Team {
         return ballsPlayed;
     }
 
+    private String overPlayed() {
+        return String.format("%d.%d", ballsPlayed/6, ballsPlayed%6);
+    }
+
     public void display() {
-        System.out.printf("Team: %s\tRuns Scored: %d\tBall Played: %d\n", name, teamScore, ballsPlayed);
+        System.out.printf("Team: %s\tScore: %d (%s)\n", name, teamScore, overPlayed());
     }
 }

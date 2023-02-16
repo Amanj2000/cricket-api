@@ -1,21 +1,38 @@
 public class Match {
-    private Team team1;
-    private Team team2;
+    private final Team team1;
+    private final Team team2;
+    private final int overs;
 
-    public Match(Team team1, Team team2) {
+    public Match(Team team1, Team team2, int overs) {
         this.team1 = team1;
         this.team2 = team2;
+        this.overs = overs;
+    }
+
+    private int toBalls(int overs) {
+        return 6 * overs;
+    }
+
+    private void playMatch(Team t1, Team t2) {
+        System.out.println("Batting Team: " + t1.getName());
+        t1.firstInning(toBalls(overs));
+        t1.display();
+        System.out.println();
+
+        System.out.println("Batting Team: " + t2.getName());
+        t2.secondInning(toBalls(overs), t1.getTeamScore() + 1);
+        t2.display();
+        System.out.println();
     }
 
     public void startMatch() {
-        System.out.println("Team batting: " + team1.getName());
-        team1.play();
-        team1.display();
-        System.out.println();
-        System.out.println("Team batting: " + team2.getName());
-        team2.play();
-        team2.display();
-        System.out.println();
+        int toss = (int)(Math.random() * 2);
+        System.out.printf("Team %s won the toss and decided to bat\n", (toss == 0 ? team1.getName() : team2.getName()));
+        if(toss == 0) {
+            playMatch(team1, team2);
+        } else {
+            playMatch(team2, team1);
+        }
     }
 
     public void displayResult() {
@@ -24,7 +41,7 @@ public class Match {
         } else if(team1.getTeamScore() < team2.getTeamScore()) {
             System.out.printf("%s won!\n", team2.getName());
         } else {
-            System.out.printf("Draw\n");
+            System.out.printf("Draw.\n");
         }
     }
 }
